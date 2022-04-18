@@ -1,0 +1,1 @@
+validSatelites = ["Kenobi", "Skywalker", "Sato"]
