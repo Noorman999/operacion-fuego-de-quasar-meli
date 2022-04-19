@@ -27,6 +27,17 @@ class Shuttle:
         ey = (P3 - P1 - i*ex)/(numpy.linalg.norm(P3 - P1 - i*ex))
         d = numpy.linalg.norm(P2 - P1)
         j = numpy.dot(ey, P3 - P1)
+
+        #validaciones
+        #se valida interseccion los radios de los satelites
+        d2 = numpy.linalg.norm(P3 - P1)
+        d3 = numpy.linalg.norm(P3 - P2)
+        if d > (kenobiDistance + skywalkerDistance) or d2 > (kenobiDistance + satoDistance) or d3 > (satoDistance + skywalkerDistance):
+            raise Exception('No se puede encontrar el satelite ya que la informacion dada no es valida')
+
+        if d < abs(kenobiDistance - skywalkerDistance) or d2 < abs(kenobiDistance - satoDistance) or d3 < abs(satoDistance - skywalkerDistance):
+            raise Exception('No se puede encontrar el satelite ya que la informacion dada no es valida')
+
         x = (pow(kenobiDistance,2) - pow(skywalkerDistance,2) + pow(d,2))/(2*d)
         y = ((pow(kenobiDistance,2) - pow(satoDistance,2) + pow(i,2) + pow(j,2))/(2*j)) - ((i/j)*x)
 

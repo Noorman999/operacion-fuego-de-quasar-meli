@@ -1,0 +1,2 @@
+class InvalidSateliteData(Exception):
+    pass

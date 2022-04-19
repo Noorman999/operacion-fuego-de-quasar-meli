@@ -1,4 +1,4 @@
-validSatelites = ["Kenobi", "Skywalker", "Sato"]
+validSatelites = ["kenobi", "skywalker", "sato"]
 
 satelitesCoordinates = {
     "Kenobi": {

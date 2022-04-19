@@ -46,6 +46,24 @@ class SqliteHandler:
         self.conn.commit()
         return attribute[0][0]
 
+    
+    def set_model_attributes(self, model: str, name: str, attributes: dict):
+        if model == None or name == None or attributes == None or len(attributes) == 0:
+            raise Exception("Todos los atributos son obligatorios")
+        setter = ""
+        for attribute in attributes:
+            setter = setter + attribute + '="' + str(attributes[attribute]) + '", '
+        setter = setter[:-2]
+        curs = self.conn.cursor()
+        curs.execute(f'UPDATE {model} SET {setter} WHERE name="{name}";')
+        self.conn.commit()
+
+    
+    def delete_model(self, model: str, name: str):
+        curs = self.conn.cursor()
+        curs.execute(f'DELETE FROM {model} WHERE name="{name}";')
+        self.conn.commit()
+
 
     def disconnect(self):
         self.conn.close()
