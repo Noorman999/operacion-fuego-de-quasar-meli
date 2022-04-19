@@ -53,10 +53,9 @@ class Satelite:
     def distance(self, distance):
         if distance == None:
             distance = self.dbconn.get_model_attribute("Satelite", self.name, "distance")
-        if type(distance) != float:
-            raise InvalidSateliteData("La distancia debe de ser un flotante")
+        if type(distance) != float and type(distance) != int:
+            raise InvalidSateliteData("La distancia debe de ser un numero")
         self._distance = distance
-
 
 
     def getDistance(self) -> float:

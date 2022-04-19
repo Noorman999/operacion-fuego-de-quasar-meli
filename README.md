@@ -23,7 +23,7 @@ Sato en Posicion x=500 y=100
    
       ○ Ejemplo: [“este”, “es”, “”, “mensaje”]
       
-  ● Puede existir un desfasaje en el mensaje que se respeta en todos los recibidos por los satelites.
+  ● Puede existir un desfasaje en el mensaje que se respeta en todos los recibidos por los satelites (el arreglo de strings para todos siempre va a tener la misma longitud).
   
       ○ Ejemplo:
         ■ Kenobi: [“”, “este”, “es”, “un”, “mensaje”]
