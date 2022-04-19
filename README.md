@@ -29,6 +29,11 @@ Sato en Posicion x=500 y=100
         ■ Kenobi: [“”, “este”, “es”, “un”, “mensaje”]
         ■ Skywalker: [“”, “este”, “”, “un”, “mensaje”]
         ■ Sato: [“”, ””, ”es”, ””, ”mensaje”]
+        
+#### Triangulacion de Posicion:
+
+Para la triangulacion de la posicion del Shuttle Rebelde se utilizo el algoritmo de Trilateracion 2D
+
 
 ## Nivel 1
 
