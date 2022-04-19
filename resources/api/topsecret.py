@@ -32,7 +32,7 @@ class TopSecretSplitPost(Resource):
             args = request.json
             satelite = Satelite(satelite, args["distance"], args["message"])
             satelite.save()
-            return { "status": args }, 200
+            return { "status": f"Satelite {satelite.name} cargado" }, 200
 
         except Exception as default_error:
             return {"error": str(default_error)}, 500
