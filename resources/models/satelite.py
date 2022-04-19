@@ -1,3 +1,4 @@
+import ast
 from resources.db.sqlite3 import SqliteHandler
 from resources.utils.satelites import validSatelites
 
@@ -8,19 +9,26 @@ class Satelite:
             raise Exception("Se necesita un nombre para el satelite")
         if name not in validSatelites:
             raise Exception("Nombre de Satelite Invalido")
-        dbconn = SqliteHandler()
-        dbconn.create_model("Satelite", {"distance": "REAL", "message": "text"})
-        dbconn.create_object("Satelite", name)
+        self.dbconn = SqliteHandler()
+        self.dbconn.create_model("Satelite", {"distance": "REAL", "message": "text"})
+        self.dbconn.create_object("Satelite", name)
         self.name = name
 
 
     def setDistance(self, distance: float):
-        dbconn = SqliteHandler()
-        dbconn.set_model_attribute("Satelite", self.name, "distance", distance)
-        dbconn.disconnect()
+        self.dbconn.set_model_attribute("Satelite", self.name, "distance", distance)
 
 
     def setMessage(self, message: str):
-        dbconn = SqliteHandler()
-        dbconn.set_model_attribute("Satelite", self.name, "message", message)
-        dbconn.disconnect()
+        self.dbconn.set_model_attribute("Satelite", self.name, "message", message)
+
+
+    def getDistance(self) -> float:
+        return self.dbconn.get_model_attribute("Satelite", self.name, "distance")
+
+    
+    def getMessage(self) -> list:
+        message = self.dbconn.get_model_attribute("Satelite", self.name, "message")
+        return ast.literal_eval(message) if type(message) == str else message
+
+

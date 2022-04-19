@@ -3,6 +3,7 @@ from flask import request
 import os
 
 from resources.models.satelite import Satelite
+from resources.models.shuttle import Shuttle
 
 api = Namespace('', description='Top Secret Actions')
 
@@ -20,7 +21,6 @@ class ShouldLogin(Resource):
         responses={
             200: "SUCCESS",
             207: "SUCCESSFUL RESULT WITH MESSAGE",
-            213: "ERROR RESULT WITH MESSAGE",
             307: "TEMPORARY REDIRECT",
             308: "PERMANENT REDIRECT",
             400: "BAD REQUEST",
@@ -31,10 +31,26 @@ class ShouldLogin(Resource):
         },
         security=['apikey']
     )
+
+    def get(self):
+        try:
+            shuttle = Shuttle()
+            kenobi = Satelite("Kenobi")
+            skywalker = Satelite("Skywalker")
+            sato = Satelite("Sato")
+            print(shuttle.GetLocation(kenobi.getDistance(), skywalker.getDistance(), sato.getDistance()))
+            return { "status": "test" }, 200
+        except Exception as default_error:
+            return {"result": str(default_error)}, 213
+    
     @api.expect(post_parser)
     def post(self):
         try:
             args = request.json
+            if type(args["distance"]) != float and type(args["distance"]) != int:
+                return {"error": "La distancia debe de ser un flotante"}, 400
+            if type(args["message"]) != list:
+                return {"error": "El mensaje debe de ser una lista"}, 400
             satelite = Satelite(args["name"])
             satelite.setDistance(args["distance"])
             satelite.setMessage(args["message"])
