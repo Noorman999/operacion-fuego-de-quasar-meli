@@ -30,4 +30,22 @@ class Shuttle:
         x = (pow(kenobiDistance,2) - pow(skywalkerDistance,2) + pow(d,2))/(2*d)
         y = ((pow(kenobiDistance,2) - pow(satoDistance,2) + pow(i,2) + pow(j,2))/(2*j)) - ((i/j)*x)
 
-        return P1 + x*ex + y*ey
+        finalPoint = P1 + x*ex + y*ey
+
+        return round(finalPoint[0], 2), round(finalPoint[1], 2)
+
+    
+    def GetMessage(self, kenobiMessage, skywalkerMessage, satoMessage):
+        if kenobiMessage == None or skywalkerMessage == None or satoMessage == None:
+            raise Exception("No hay informacion suficiente para sacar el calculo")
+        full_message = []
+        messages = [kenobiMessage, skywalkerMessage, satoMessage]
+        message_len = max(len(kenobiMessage), len(skywalkerMessage), len(satoMessage))
+        for i in range(message_len):
+            for message in messages:
+                if message[i] != "":
+                    full_message.append(message[i])
+                    break
+        return " ".join(full_message)
+
+            

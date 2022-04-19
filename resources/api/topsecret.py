@@ -38,8 +38,9 @@ class ShouldLogin(Resource):
             kenobi = Satelite("Kenobi")
             skywalker = Satelite("Skywalker")
             sato = Satelite("Sato")
-            print(shuttle.GetLocation(kenobi.getDistance(), skywalker.getDistance(), sato.getDistance()))
-            return { "status": "test" }, 200
+            x, y = shuttle.GetLocation(kenobi.getDistance(), skywalker.getDistance(), sato.getDistance())
+            message = shuttle.GetMessage(kenobi.getMessage(), skywalker.getMessage(), sato.getMessage())
+            return { "position": { "x": x, "y": y }, "message": message }, 200
         except Exception as default_error:
             return {"result": str(default_error)}, 213
     
